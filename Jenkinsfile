@@ -15,9 +15,9 @@ pipeline {
     }
 
     stage('Deploy DEV') {
-      when {
-        changeset "dev/**"
-      }
+    //   when {
+    //     changeset "dev/**"
+    //   }
       steps {
         withAWS(role: 'arn:aws:iam::568179491853:role/JenkinsDevDeployRole',
                 region: "${AWS_REGION}") {
