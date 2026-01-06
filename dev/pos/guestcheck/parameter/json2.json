@@ -1,0 +1,24 @@
+{
+    "testId": "TC001",
+    "testName": "Sample Test Case",
+    "environment": "dev",
+    "testSteps": [
+        {
+            "stepId": 1,
+            "action": "login",
+            "username": "testuser",
+            "password": "testpass123"
+        },
+        {
+            "stepId": 2,
+            "action": "createOrder",
+            "itemId": "ITEM001",
+            "quantity": 2
+        },
+        {
+            "stepId": 3,
+            "action": "checkout",
+            "paymentMethod": "card"
+        }
+    ]
+}
