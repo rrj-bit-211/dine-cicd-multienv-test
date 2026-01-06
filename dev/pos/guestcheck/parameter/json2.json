@@ -12,7 +12,7 @@
         {
             "stepId": 2,
             "action": "createOrder",
-            "itemId": "ITEM001",
+            "itemId": "ITEM1001",
             "quantity": 2
         },
         {
