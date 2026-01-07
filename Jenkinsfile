@@ -19,7 +19,8 @@ pipeline {
     //     changeset "dev/**"
     //   }
       steps {
-        withAWS(role: 'arn:aws:iam::568179491853:role/JenkinsDevDeployRole',
+        withAWS(credentials: 'aws-poc-creds',
+                role: 'arn:aws:iam::568179491853:role/JenkinsDevDeployRole',
                 region: "${AWS_REGION}") {
           sh """
             aws s3 sync dev/ s3://${BUCKET}/dev/ --delete
@@ -42,7 +43,8 @@ pipeline {
         changeset "prod/**"
       }
       steps {
-        withAWS(role: 'arn:aws:iam::568179491853:role/JenkinsProdDeployRole',
+        withAWS(credentials: 'aws-poc-creds',
+                role: 'arn:aws:iam::568179491853:role/JenkinsProdDeployRole',
                 region: "${AWS_REGION}") {
           sh """
             aws s3 sync prod/ s3://${BUCKET}/prod/ --exact-timestamps

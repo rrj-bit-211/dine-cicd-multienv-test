@@ -6,7 +6,7 @@
         {
             "stepId": 1,
             "action": "login",
-            "username": "testuser",
+            "username": "testuser1",
             "password": "testpass123"
         },
         {
