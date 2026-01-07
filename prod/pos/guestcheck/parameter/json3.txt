@@ -19,14 +19,7 @@
             "price": 12.50,
             "subtotal": 25.00
         },
-        {
-            "itemId": "ITEM-003",
-            "name": "Cheesecake",
-            "quantity": 1,
-            "price": 8.99,
-            "subtotal": 8.99
-        }
-    ],
+            ],
     "subtotal": 83.97,
     "tax": 6.72,
     "total": 90.69,
