@@ -30,10 +30,14 @@ pipeline {
     }
 
     stage('Approval for PROD') {
+        agent none
       when {
         changeset "prod/**"
       }
       steps {
+        timeout(time: 10, unit: 'seconds') {
+          echo "Skipping wait for approval in test"
+        }
         input message: "Approve deployment to PROD?"
       }
     }
