@@ -1,0 +1,35 @@
+{
+    "guestCheckId": "GC-2024-001",
+    "timestamp": "2024-01-15T14:30:00Z",
+    "location": "Main Restaurant",
+    "tableNumber": 5,
+    "partySize": 4,
+    "items": [
+        {
+            "itemId": "ITEM-001",
+            "name": "Grilled Salmon",
+            "quantity": 2,
+            "price": 24.99,
+            "subtotal": 49.98
+        },
+        {
+            "itemId": "ITEM-002",
+            "name": "Caesar Salad",
+            "quantity": 2,
+            "price": 12.50,
+            "subtotal": 25.00
+        },
+        {
+            "itemId": "ITEM-003",
+            "name": "Cheesecake",
+            "quantity": 1,
+            "price": 8.99,
+            "subtotal": 8.99
+        }
+    ],
+    "subtotal": 83.97,
+    "tax": 6.72,
+    "total": 90.69,
+    "paymentMethod": "credit_card",
+    "status": "completed"
+}
