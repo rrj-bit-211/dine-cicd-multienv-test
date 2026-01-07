@@ -1,69 +1,69 @@
 pipeline {
-  agent any
+    agent any
 
-  environment {
-    AWS_REGION = "ap-south-1"
-    BUCKET     = "dine-test-multienv"
-  }
-
-  stages {
-
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
+    environment {
+        AWS_REGION = 'ap-south-1'
+        BUCKET     = 'dine-test-multienv'
     }
 
-    stage('Deploy DEV') {
-    //   when {
-    //     changeset "dev/**"
-    //   }
-      steps {
-        withAWS(credentials: 'aws-poc-creds',
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Deploy DEV') {
+            //   when {
+            //     changeset "dev/**"
+            //   }
+            steps {
+                withAWS(credentials: 'aws-poc-creds',
                 role: 'arn:aws:iam::568179491853:role/JenkinsDevDeployRole',
                 region: "${AWS_REGION}") {
-          sh """
+                    sh """
             aws s3 sync dev/ s3://${BUCKET}/dev/ --delete
           """
+                }
+            }
         }
-      }
-    }
 
-    stage('Approval for PROD') {
-        agent none
-      when {
-        changeset "prod/**"
-      }
-      steps {
-        timeout(time: 10, unit: 'seconds') {
-          echo "Skipping wait for approval in test"
+        stage('Approval for PROD') {
+            agent none
+            when {
+                changeset 'prod/**'
+            }
+            steps {
+                timeout(time: 10, unit: java.util.concurrent.TimeUnit.SECONDS) {
+                    echo 'Skipping wait for approval in test'
+                }
+                input message: 'Approve deployment to PROD?'
+            }
         }
-        input message: "Approve deployment to PROD?"
-      }
-    }
 
-    stage('Deploy PROD') {
-      when {
-        changeset "prod/**"
-      }
-      steps {
-        withAWS(credentials: 'aws-poc-creds',
+        stage('Deploy PROD') {
+            when {
+                changeset 'prod/**'
+            }
+            steps {
+                withAWS(credentials: 'aws-poc-creds',
                 role: 'arn:aws:iam::568179491853:role/JenkinsProdDeployRole',
                 region: "${AWS_REGION}") {
-          sh """
+                    sh """
             aws s3 sync prod/ s3://${BUCKET}/prod/ --exact-timestamps
           """
+                }
+            }
         }
-      }
     }
-  }
 
-  post {
-    success {
-      echo "✅ Deployment completed successfully"
+    post {
+        success {
+            echo '✅ Deployment completed successfully'
+        }
+        failure {
+            echo '❌ Deployment failed'
+        }
     }
-    failure {
-      echo "❌ Deployment failed"
-    }
-  }
 }
