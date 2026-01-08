@@ -15,8 +15,8 @@
         {
             "itemId": "ITEM-002",
             "name": "Caesar Salad",
-            "quantity": 2,
-            "price": 12.50,
+            "quantity": 5,
+            "price": 20.50,
             "subtotal": 25.00
         },
             ],
