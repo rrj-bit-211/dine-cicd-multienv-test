@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    paramet
+    parameters
     {
         choice(
             name: 'BRANCH',
@@ -17,13 +17,21 @@ pipeline {
 
     stages {
 
-        stage('Checkout selected branch') {
-            steps {
-                [$class: 'GitSCM',
+        stage("Checkout Selected Branch") {
+      steps {
+        checkout([$class: 'GitSCM',
           branches: [[name: "${BRANCH}"]],
-          userRemoteConfigs: [[url: 'https://github.com/rrj-bit-211/dine-cicd-multienv-test.git']]]
-            }
+          userRemoteConfigs: [[url: 'https://github.com/rrj-bit-211/dine-cicd-multienv-test.git']]
+        ])
         }
+    }
+        // stage('Checkout selected branch') {
+        //     steps {
+        //         checkout([$class: 'GitSCM',
+        //   branches: [[name: "${BRANCH}"]],
+        //   userRemoteConfigs: [[url: 'https://github.com/rrj-bit-211/dine-cicd-multienv-test.git']]]
+        //     }
+        // }
 
         stage('Deploy DEV') {
               when {
